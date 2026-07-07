@@ -1,0 +1,124 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User's fitness profile and configuration settings",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "currentWeightKg": { "type": "number" },
+        "targetWeightKg": { "type": "number" },
+        "heightCm": { "type": "number" },
+        "age": { "type": "number" },
+        "gender": { "type": "string" },
+        "activityLevel": { "type": "string" },
+        "phoneCountryCode": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "customAppName": { "type": "string" },
+        "hydrationReminderMinutes": { "type": "number" },
+        "measurementSystem": { "type": "string" },
+        "dietFormula": { "type": "string" },
+        "soundEffectsEnabled": { "type": "boolean" }
+      },
+      "required": ["name", "currentWeightKg", "targetWeightKg", "heightCm", "age", "gender", "activityLevel"]
+    },
+    "UserGoals": {
+      "title": "UserGoals",
+      "description": "Daily nutrient and hydration targets",
+      "type": "object",
+      "properties": {
+        "dailyCalorieBudget": { "type": "number" },
+        "targetProteinG": { "type": "number" },
+        "targetCarbsG": { "type": "number" },
+        "targetFatG": { "type": "number" },
+        "targetWeightKg": { "type": "number" },
+        "waterGoalMl": { "type": "number" }
+      },
+      "required": ["dailyCalorieBudget", "targetProteinG", "targetCarbsG", "targetFatG", "targetWeightKg", "waterGoalMl"]
+    },
+    "MealLog": {
+      "title": "MealLog",
+      "description": "A record of food logged by the user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "foodName": { "type": "string" },
+        "calories": { "type": "number" },
+        "protein": { "type": "number" },
+        "carbs": { "type": "number" },
+        "fat": { "type": "number" },
+        "weightGrams": { "type": "number" },
+        "date": { "type": "string" },
+        "timestamp": { "type": "number" },
+        "imageUrl": { "type": "string" },
+        "items": { "type": "array" }
+      },
+      "required": ["id", "foodName", "calories", "protein", "carbs", "fat", "date", "timestamp"]
+    },
+    "WorkoutLog": {
+      "title": "WorkoutLog",
+      "description": "A record of physical exercise performed",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "calories": { "type": "number" },
+        "durationMinutes": { "type": "number" },
+        "type": { "type": "string" },
+        "date": { "type": "string" },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["id", "title", "calories", "durationMinutes", "type", "date", "timestamp"]
+    },
+    "WaterLog": {
+      "title": "WaterLog",
+      "description": "Water hydration log",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "amountMl": { "type": "number" },
+        "date": { "type": "string" },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["id", "amountMl", "date", "timestamp"]
+    },
+    "WeightLog": {
+      "title": "WeightLog",
+      "description": "Body weight log entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "weightKg": { "type": "number" },
+        "date": { "type": "string" },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["id", "weightKg", "date", "timestamp"]
+    }
+  },
+  "firestore": {
+    "users/{userId}/profile/{profileId}": {
+      "schema": "UserProfile",
+      "description": "User specific configuration profiles"
+    },
+    "users/{userId}/goals/{goalId}": {
+      "schema": "UserGoals",
+      "description": "User daily nutrient and weight targets"
+    },
+    "users/{userId}/meals/{mealId}": {
+      "schema": "MealLog",
+      "description": "Meals logged by the user"
+    },
+    "users/{userId}/workouts/{workoutId}": {
+      "schema": "WorkoutLog",
+      "description": "Workouts performed by the user"
+    },
+    "users/{userId}/water/{waterId}": {
+      "schema": "WaterLog",
+      "description": "Water logged by the user"
+    },
+    "users/{userId}/weight/{weightId}": {
+      "schema": "WeightLog",
+      "description": "Weight entries logged by the user"
+    }
+  }
+}

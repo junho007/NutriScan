@@ -1,0 +1,6 @@
+{
+  "name": "Core",
+  "description": "An AI-powered meal scanner and fitness companion that estimates calories and macronutrients from food images, logs workouts, and tracks body weight using Firestore cloud storage.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
