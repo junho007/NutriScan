@@ -284,7 +284,7 @@ export default function AiTips() {
       
       if (isHeader) {
         return (
-          <h4 key={i} className="text-xs font-black text-slate-800 mt-2.5 mb-1 tracking-wide uppercase flex items-center gap-1">
+          <h4 key={i} className="text-sm font-black text-slate-800 mt-2.5 mb-1 tracking-wide uppercase flex items-center gap-1">
             <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>
             {finalContent}
           </h4>
@@ -308,7 +308,7 @@ export default function AiTips() {
         }
         
         return (
-          <li key={i} className="ml-3.5 list-disc pl-1 text-[11px] text-slate-600 leading-relaxed my-1">
+          <li key={i} className="ml-3.5 list-disc pl-1 text-sm text-slate-600 leading-relaxed my-1">
             {bParts.length > 0 ? bParts : bulletText}
           </li>
         );
@@ -317,7 +317,7 @@ export default function AiTips() {
       return line.trim() === "" ? (
         <div key={i} className="h-1.5"></div>
       ) : (
-        <p key={i} className="text-[11px] text-slate-600 leading-relaxed my-0.5 break-words">
+        <p key={i} className="text-sm text-slate-600 leading-relaxed my-1 break-words">
           {finalContent}
         </p>
       );
@@ -452,7 +452,7 @@ export default function AiTips() {
                     For your height of <strong className="text-slate-900">{profile.heightCm} cm</strong>, the standard healthy weight range is <strong className="text-slate-900">{minNormalWeight} kg to {maxNormalWeight} kg</strong>.
                   </p>
                   
-                  <div className="p-3 bg-white rounded-xl border border-slate-100 text-[11px] leading-relaxed">
+                  <div className="p-3 bg-white rounded-xl border border-slate-100 text-xs leading-relaxed">
                     {localBmiCategory === "Overweight" || localBmiCategory === "Obese" ? (
                       <div className="flex items-start gap-2 text-amber-800">
                         <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
@@ -516,28 +516,28 @@ export default function AiTips() {
                 </div>
 
                 <div className="space-y-3">
-                  <div className="flex justify-between items-center text-xs">
+                  <div className="flex justify-between items-center text-sm">
                     <span className="text-slate-400 font-medium">User Profile:</span>
                     <strong className="text-slate-800 font-bold capitalize">{profile.name}</strong>
                   </div>
-                  <div className="flex justify-between items-center text-xs">
+                  <div className="flex justify-between items-center text-sm">
                     <span className="text-slate-400 font-medium">Cuisine Map:</span>
-                    <span className="text-indigo-600 bg-indigo-50/50 border border-indigo-100 px-2 py-0.5 rounded-md font-bold text-[11px] flex items-center gap-1">
+                    <span className="text-indigo-600 bg-indigo-50/50 border border-indigo-100 px-2 py-0.5 rounded-md font-bold text-xs flex items-center gap-1">
                       <span>🇲🇾</span>
                       <span>{profile.nationality || "Malaysia"} Cuisine</span>
                     </span>
                   </div>
-                  <div className="flex justify-between items-center text-xs">
+                  <div className="flex justify-between items-center text-sm">
                     <span className="text-slate-400 font-medium">Daily Budget:</span>
                     <strong className="text-slate-800 font-bold">{goals?.dailyCalorieBudget || 2000} kcal</strong>
                   </div>
-                  <div className="flex justify-between items-center text-xs">
+                  <div className="flex justify-between items-center text-sm">
                     <span className="text-slate-400 font-medium">Age / Gender:</span>
                     <strong className="text-slate-800 font-bold">{profile.age} yrs / {profile.gender || "Not specified"}</strong>
                   </div>
-                  <div className="flex justify-between items-center text-xs">
+                  <div className="flex justify-between items-center text-sm">
                     <span className="text-slate-400 font-medium">Activity Level:</span>
-                    <strong className="text-slate-800 font-bold text-right text-[11px] break-words max-w-28 leading-snug">{profile.activityLevel}</strong>
+                    <strong className="text-slate-800 font-bold text-right text-xs break-words max-w-28 leading-snug">{profile.activityLevel}</strong>
                   </div>
                 </div>
               </div>
@@ -569,7 +569,7 @@ export default function AiTips() {
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                <p className="text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
                   {aiTips.nationalityDietContext.generalAdvice}
                 </p>
 
@@ -580,12 +580,12 @@ export default function AiTips() {
                       <TrendingDown className="w-4 h-4" />
                       <span>High-Calorie Traditional Foods to Reduce</span>
                     </h4>
-                    <p className="text-[11px] text-slate-400">
+                    <p className="text-xs text-slate-400">
                       These popular local dishes or preparation styles typically contain hidden calories, excess carbs, sodium, or oils. Portion control or minimize:
                     </p>
                     <ul className="space-y-2">
                       {aiTips.nationalityDietContext.traditionalFoodsToReduce.map((food, i) => (
-                        <li key={i} className="flex items-start gap-2 text-xs text-slate-700 font-semibold bg-white p-2.5 rounded-xl border border-rose-50 shadow-3xs">
+                        <li key={i} className="flex items-start gap-2 text-sm text-slate-700 font-semibold bg-white p-2.5 rounded-xl border border-rose-50 shadow-3xs">
                           <span className="w-1.5 h-1.5 bg-rose-500 rounded-full mt-1.5 flex-shrink-0"></span>
                           <span>{food}</span>
                         </li>
@@ -599,12 +599,12 @@ export default function AiTips() {
                       <TrendingUp className="w-4 h-4" />
                       <span>Optimal Foods & Smart Alternatives</span>
                     </h4>
-                    <p className="text-[11px] text-slate-400">
+                    <p className="text-xs text-slate-400">
                       Switch to these nutritious alternative swaps or increase these local, healthy dishes to keep macros in balance:
                     </p>
                     <ul className="space-y-2">
                       {aiTips.nationalityDietContext.traditionalFoodsToIncrease.concat(aiTips.nationalityDietContext.localizedHealthyAlternatives).slice(0, 5).map((food, i) => (
-                        <li key={i} className="flex items-start gap-2 text-xs text-slate-700 font-semibold bg-white p-2.5 rounded-xl border border-emerald-50 shadow-3xs">
+                        <li key={i} className="flex items-start gap-2 text-sm text-slate-700 font-semibold bg-white p-2.5 rounded-xl border border-emerald-50 shadow-3xs">
                           <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full mt-1.5 flex-shrink-0"></span>
                           <span>{food}</span>
                         </li>
@@ -628,21 +628,21 @@ export default function AiTips() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                   <div className="bg-slate-50 border border-slate-100 p-4 rounded-2xl text-center space-y-1">
-                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-wider block">Recommended Calories</span>
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider block">Recommended Calories</span>
                     <span className="text-xl font-display font-black text-indigo-950">{aiTips.recommendedCalories} kcal</span>
-                    <span className="text-[10px] text-slate-500 block font-semibold">estimated deficit baseline</span>
+                    <span className="text-[11px] text-slate-500 block font-semibold">estimated deficit baseline</span>
                   </div>
                   <div className="bg-emerald-50/30 border border-emerald-100 p-4 rounded-2xl text-center space-y-1 flex flex-col justify-center">
-                    <span className="text-[9px] font-black text-emerald-700 uppercase tracking-wider block mb-1">Protein Strategy</span>
-                    <span className="text-xs font-bold text-emerald-950 block leading-snug">{aiTips.macroRatioTips.protein}</span>
+                    <span className="text-[10px] font-black text-emerald-700 uppercase tracking-wider block mb-1">Protein Strategy</span>
+                    <span className="text-sm font-bold text-emerald-950 block leading-snug">{aiTips.macroRatioTips.protein}</span>
                   </div>
                   <div className="bg-amber-50/30 border border-amber-100 p-4 rounded-2xl text-center space-y-1 flex flex-col justify-center">
-                    <span className="text-[9px] font-black text-amber-700 uppercase tracking-wider block mb-1">Carbs Strategy</span>
-                    <span className="text-xs font-bold text-amber-950 block leading-snug">{aiTips.macroRatioTips.carbs}</span>
+                    <span className="text-[10px] font-black text-amber-700 uppercase tracking-wider block mb-1">Carbs Strategy</span>
+                    <span className="text-sm font-bold text-amber-950 block leading-snug">{aiTips.macroRatioTips.carbs}</span>
                   </div>
                   <div className="bg-rose-50/30 border border-rose-100 p-4 rounded-2xl text-center space-y-1 flex flex-col justify-center">
-                    <span className="text-[9px] font-black text-rose-700 uppercase tracking-wider block mb-1">Fats Strategy</span>
-                    <span className="text-xs font-bold text-rose-950 block leading-snug">{aiTips.macroRatioTips.fat}</span>
+                    <span className="text-[10px] font-black text-rose-700 uppercase tracking-wider block mb-1">Fats Strategy</span>
+                    <span className="text-sm font-bold text-rose-950 block leading-snug">{aiTips.macroRatioTips.fat}</span>
                   </div>
                 </div>
               </div>
@@ -668,7 +668,7 @@ export default function AiTips() {
                     </h4>
                     <ul className="space-y-2.5">
                       {aiTips.lifestyleTips.reduce.map((item, i) => (
-                        <li key={i} className="flex gap-2 text-xs text-slate-600 font-medium">
+                        <li key={i} className="flex gap-2 text-sm text-slate-600 font-medium">
                           <span className="w-1.5 h-1.5 bg-rose-400 rounded-full mt-1.5 flex-shrink-0"></span>
                           <span>{item}</span>
                         </li>
@@ -684,7 +684,7 @@ export default function AiTips() {
                     </h4>
                     <ul className="space-y-2.5">
                       {aiTips.lifestyleTips.increase.map((item, i) => (
-                        <li key={i} className="flex gap-2 text-xs text-slate-600 font-medium">
+                        <li key={i} className="flex gap-2 text-sm text-slate-600 font-medium">
                           <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-1.5 flex-shrink-0"></span>
                           <span>{item}</span>
                         </li>
@@ -700,7 +700,7 @@ export default function AiTips() {
                     </h4>
                     <ul className="space-y-2.5">
                       {aiTips.lifestyleTips.habits.map((item, i) => (
-                        <li key={i} className="flex gap-2 text-xs text-slate-600 font-medium">
+                        <li key={i} className="flex gap-2 text-sm text-slate-600 font-medium">
                           <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full mt-1.5 flex-shrink-0"></span>
                           <span>{item}</span>
                         </li>
@@ -741,9 +741,9 @@ export default function AiTips() {
           <div className="bg-slate-50/50 px-6 py-4.5 sm:px-8 sm:py-5 border-b border-slate-100 flex items-center justify-between gap-2 flex-nowrap">
             <div className="flex items-center min-w-0">
               <div className="truncate">
-                <h4 className="text-xs font-black text-slate-800 leading-none truncate">NutriCoach Advisor</h4>
-                <span className="text-[9px] text-emerald-600 font-bold flex items-center gap-1 mt-1 leading-none whitespace-nowrap">
-                  <span className="w-1 h-1 bg-emerald-500 rounded-full animate-pulse flex-shrink-0"></span>
+                <h4 className="text-sm font-black text-slate-800 leading-none truncate">NutriCoach Advisor</h4>
+                <span className="text-xs text-emerald-600 font-bold flex items-center gap-1 mt-1 leading-none whitespace-nowrap">
+                  <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse flex-shrink-0"></span>
                   <span>Active with Gemini 2.5</span>
                 </span>
               </div>
@@ -754,7 +754,7 @@ export default function AiTips() {
                 setChatHistory([]);
                 setChatError(null);
               }}
-              className="text-[10px] font-extrabold text-slate-400 hover:text-rose-500 hover:bg-rose-50 border border-slate-200/40 px-2.5 py-1 rounded-lg transition-all flex-shrink-0 whitespace-nowrap cursor-pointer"
+              className="text-xs font-extrabold text-slate-400 hover:text-rose-500 hover:bg-rose-50 border border-slate-200/40 px-3 py-1.5 rounded-lg transition-all flex-shrink-0 whitespace-nowrap cursor-pointer"
             >
               Clear Chat
             </button>
@@ -767,22 +767,22 @@ export default function AiTips() {
                 <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center animate-pulse">
                   <Sparkles className="w-6 h-6 fill-indigo-100" />
                 </div>
-                <div className="space-y-1 px-4">
-                  <h4 className="text-xs font-black text-slate-800">Ask your Nutritionist & Fitness Mentor</h4>
-                  <p className="text-[10px] text-slate-400 max-w-sm leading-relaxed">
+                <div className="space-y-1.5 px-4">
+                  <h4 className="text-sm font-black text-slate-800">Ask your Nutritionist & Fitness Mentor</h4>
+                  <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
                     Ask me traditional recipe substitutions, local food macro splits, training routines, or how to reach your goal of <strong>{profile.targetWeightKg} kg</strong>.
                   </p>
                 </div>
 
                 {/* Local Quick Prompt Templates */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-lg pt-2 px-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full max-w-lg pt-2 px-2">
                   {localPrompts.map((promptText, i) => (
                     <button
                       key={i}
                       onClick={() => handleAskCoach(promptText)}
-                      className="text-left bg-slate-50 hover:bg-indigo-50/20 border border-slate-100 hover:border-indigo-100 p-2.5 rounded-xl text-[10px] font-bold text-slate-600 hover:text-indigo-950 transition-all cursor-pointer flex items-center gap-1.5"
+                      className="text-left bg-slate-50 hover:bg-indigo-50/20 border border-slate-100 hover:border-indigo-100 p-3 rounded-xl text-xs font-bold text-slate-600 hover:text-indigo-950 transition-all cursor-pointer flex items-center gap-2"
                     >
-                      <Utensils className="w-3.5 h-3.5 text-indigo-400 flex-shrink-0" />
+                      <Utensils className="w-4 h-4 text-indigo-400 flex-shrink-0" />
                       <span className="line-clamp-2 leading-snug">{promptText}</span>
                     </button>
                   ))}
@@ -805,15 +805,15 @@ export default function AiTips() {
                       {msg.role === "user" ? (
                         <div className="space-y-1">
                           <div className="text-[10px] uppercase tracking-wider font-extrabold text-indigo-700 select-none">You</div>
-                          <p className="text-xs font-bold whitespace-pre-wrap break-words text-slate-800">{msg.text}</p>
+                          <p className="text-sm font-bold whitespace-pre-wrap break-words text-slate-800">{msg.text}</p>
                         </div>
                       ) : (
                         <div className="space-y-1.5">
                           <div className="text-[10px] uppercase tracking-wider font-extrabold text-indigo-900 select-none flex items-center gap-1">
-                            <Sparkles className="w-3 h-3 text-indigo-500 fill-indigo-100" />
+                            <Sparkles className="w-3.5 h-3.5 text-indigo-500 fill-indigo-100" />
                             <span>NutriCoach Advisor</span>
                           </div>
-                          <div className="text-xs font-medium leading-relaxed whitespace-normal break-words text-slate-800">
+                          <div className="text-sm font-medium leading-relaxed whitespace-normal break-words text-slate-800">
                             {renderMessageText(msg.text)}
                           </div>
                         </div>

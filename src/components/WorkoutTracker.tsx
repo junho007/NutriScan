@@ -333,8 +333,8 @@ export default function WorkoutTracker({ onWorkoutLogged, activeDate }: WorkoutT
                     <div className="relative">
                       <input
                         type="number"
-                        value={userWeight}
-                        onChange={(e) => setUserWeight(parseFloat(e.target.value) || 75)}
+                        value={userWeight || ""}
+                        onChange={(e) => setUserWeight(e.target.value === "" ? 0 : (parseFloat(e.target.value) || 0))}
                         className="w-full bg-white border border-slate-150 rounded-2xl pl-3.5 pr-10 py-2.5 text-xs font-bold text-slate-800"
                         min="10"
                         max="300"

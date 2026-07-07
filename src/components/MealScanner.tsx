@@ -84,6 +84,7 @@ export default function MealScanner({ onMealLogged, activeDate }: MealScannerPro
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]);
   const [activeCameraId, setActiveCameraId] = useState<string>("");
+  const [isMirrored, setIsMirrored] = useState(false);
 
   // Edit States for the identified scanned items
   const [editedItems, setEditedItems] = useState<FoodItem[]>([]);
@@ -178,6 +179,11 @@ export default function MealScanner({ onMealLogged, activeDate }: MealScannerPro
       canvas.height = height;
       const ctx = canvas.getContext("2d");
       if (ctx) {
+        // If preview is mirrored, we must mirror the canvas drawing as well
+        if (isMirrored) {
+          ctx.translate(width, 0);
+          ctx.scale(-1, 1);
+        }
         // Draw the image onto the downscaled canvas
         ctx.drawImage(video, 0, 0, width, height);
         // Compress as JPEG with 0.5 quality (extremely small, fits beautifully under Firestore size limits)
@@ -501,9 +507,20 @@ export default function MealScanner({ onMealLogged, activeDate }: MealScannerPro
                     ref={videoRef} 
                     autoPlay 
                     playsInline 
-                    className="w-full h-full object-cover scale-x-[-1]"
+                    className={`w-full h-full object-cover transition-all duration-300 ${isMirrored ? "scale-x-[-1]" : ""}`}
                   />
                   
+                  {/* Mirror toggle button */}
+                  <button
+                    onClick={() => setIsMirrored(!isMirrored)}
+                    type="button"
+                    className="absolute top-3 right-3 bg-black/60 hover:bg-black/85 backdrop-blur-xs text-white rounded-full px-3 py-1.5 text-[10px] font-black tracking-wider uppercase transition-all cursor-pointer flex items-center gap-1.5 select-none hover:scale-105 active:scale-95"
+                    title="Mirror or Unmirror Camera Preview"
+                  >
+                    <RefreshCw className="w-3 h-3 animate-spin-slow" />
+                    <span>{isMirrored ? "Unmirror" : "Mirror"}</span>
+                  </button>
+
                   {/* Camera overlay targets */}
                   <div className="absolute inset-0 border-2 border-indigo-500/20 m-6 rounded-lg pointer-events-none flex items-center justify-center">
                     <div className="w-48 h-48 border border-dashed border-indigo-400/50 rounded-full"></div>
@@ -724,8 +741,8 @@ export default function MealScanner({ onMealLogged, activeDate }: MealScannerPro
                       {isEditingList ? (
                         <input
                           type="number"
-                          value={item.weightGrams}
-                          onChange={(e) => updateItemProperty(idx, "weightGrams", parseInt(e.target.value) || 0)}
+                          value={item.weightGrams || ""}
+                          onChange={(e) => updateItemProperty(idx, "weightGrams", e.target.value === "" ? 0 : (parseInt(e.target.value) || 0))}
                           className="w-12 text-center font-bold text-slate-800 focus:outline-none bg-slate-50 rounded px-1 text-xs"
                         />
                       ) : (
@@ -739,8 +756,8 @@ export default function MealScanner({ onMealLogged, activeDate }: MealScannerPro
                       {isEditingList ? (
                         <input
                           type="number"
-                          value={item.calories}
-                          onChange={(e) => updateItemProperty(idx, "calories", parseInt(e.target.value) || 0)}
+                          value={item.calories || ""}
+                          onChange={(e) => updateItemProperty(idx, "calories", e.target.value === "" ? 0 : (parseInt(e.target.value) || 0))}
                           className="w-12 text-center font-bold text-indigo-800 focus:outline-none bg-indigo-50/30 rounded px-1 text-xs"
                         />
                       ) : (
@@ -755,8 +772,8 @@ export default function MealScanner({ onMealLogged, activeDate }: MealScannerPro
                         {isEditingList ? (
                           <input
                             type="number"
-                            value={item.protein}
-                            onChange={(e) => updateItemProperty(idx, "protein", parseInt(e.target.value) || 0)}
+                            value={item.protein || ""}
+                            onChange={(e) => updateItemProperty(idx, "protein", e.target.value === "" ? 0 : (parseInt(e.target.value) || 0))}
                             className="w-8 border border-slate-200 rounded text-center text-emerald-800 font-bold focus:outline-none bg-slate-50"
                           />
                         ) : (
@@ -768,8 +785,8 @@ export default function MealScanner({ onMealLogged, activeDate }: MealScannerPro
                         {isEditingList ? (
                           <input
                             type="number"
-                            value={item.carbs}
-                            onChange={(e) => updateItemProperty(idx, "carbs", parseInt(e.target.value) || 0)}
+                            value={item.carbs || ""}
+                            onChange={(e) => updateItemProperty(idx, "carbs", e.target.value === "" ? 0 : (parseInt(e.target.value) || 0))}
                             className="w-8 border border-slate-200 rounded text-center text-amber-800 font-bold focus:outline-none bg-slate-50"
                           />
                         ) : (
@@ -781,8 +798,8 @@ export default function MealScanner({ onMealLogged, activeDate }: MealScannerPro
                         {isEditingList ? (
                           <input
                             type="number"
-                            value={item.fat}
-                            onChange={(e) => updateItemProperty(idx, "fat", parseInt(e.target.value) || 0)}
+                            value={item.fat || ""}
+                            onChange={(e) => updateItemProperty(idx, "fat", e.target.value === "" ? 0 : (parseInt(e.target.value) || 0))}
                             className="w-8 border border-slate-200 rounded text-center text-rose-800 font-bold focus:outline-none bg-slate-50"
                           />
                         ) : (

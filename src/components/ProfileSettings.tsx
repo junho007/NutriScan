@@ -528,7 +528,7 @@ export default function ProfileSettings({ onProfileUpdated, onAppNameChanged, cu
                 <input
                   type="number"
                   value={profile.age || ""}
-                  onChange={(e) => setProfile({ ...profile, age: parseInt(e.target.value) || 28 })}
+                  onChange={(e) => setProfile({ ...profile, age: e.target.value === "" ? 0 : (parseInt(e.target.value) || 0) })}
                   className="w-full bg-slate-50 border border-slate-150 hover:bg-slate-100 focus:bg-white rounded-2xl px-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
                   min="5"
                   max="120"
@@ -541,7 +541,7 @@ export default function ProfileSettings({ onProfileUpdated, onAppNameChanged, cu
                 <input
                   type="number"
                   value={profile.heightCm || ""}
-                  onChange={(e) => setProfile({ ...profile, heightCm: parseInt(e.target.value) || 175 })}
+                  onChange={(e) => setProfile({ ...profile, heightCm: e.target.value === "" ? 0 : (parseInt(e.target.value) || 0) })}
                   className="w-full bg-slate-50 border border-slate-150 hover:bg-slate-100 focus:bg-white rounded-2xl px-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
                   min="60"
                   max="250"
@@ -554,7 +554,7 @@ export default function ProfileSettings({ onProfileUpdated, onAppNameChanged, cu
                 <input
                   type="number"
                   value={profile.currentWeightKg || ""}
-                  onChange={(e) => setProfile({ ...profile, currentWeightKg: parseFloat(e.target.value) || 75 })}
+                  onChange={(e) => setProfile({ ...profile, currentWeightKg: e.target.value === "" ? 0 : (parseFloat(e.target.value) || 0) })}
                   className="w-full bg-slate-50 border border-slate-150 hover:bg-slate-100 focus:bg-white rounded-2xl px-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
                   min="20"
                   max="300"
@@ -568,7 +568,7 @@ export default function ProfileSettings({ onProfileUpdated, onAppNameChanged, cu
                 <input
                   type="number"
                   value={profile.targetWeightKg || ""}
-                  onChange={(e) => setProfile({ ...profile, targetWeightKg: parseFloat(e.target.value) || 70 })}
+                  onChange={(e) => setProfile({ ...profile, targetWeightKg: e.target.value === "" ? 0 : (parseFloat(e.target.value) || 0) })}
                   className="w-full bg-slate-50 border border-slate-150 hover:bg-slate-100 focus:bg-white rounded-2xl px-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
                   min="20"
                   max="300"
@@ -890,8 +890,8 @@ export default function ProfileSettings({ onProfileUpdated, onAppNameChanged, cu
                     <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">Height (cm)</label>
                     <input
                       type="number"
-                      value={calcHeight}
-                      onChange={(e) => setCalcHeight(parseInt(e.target.value) || 175)}
+                      value={calcHeight || ""}
+                      onChange={(e) => setCalcHeight(e.target.value === "" ? 0 : (parseInt(e.target.value) || 0))}
                       className="w-full bg-slate-50 border border-slate-150 hover:bg-slate-100 rounded-xl px-3 py-2.5 text-xs font-semibold text-slate-800"
                     />
                   </div>
@@ -899,8 +899,8 @@ export default function ProfileSettings({ onProfileUpdated, onAppNameChanged, cu
                     <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">Weight (kg)</label>
                     <input
                       type="number"
-                      value={calcWeight}
-                      onChange={(e) => setCalcWeight(parseFloat(e.target.value) || 75)}
+                      value={calcWeight || ""}
+                      onChange={(e) => setCalcWeight(e.target.value === "" ? 0 : (parseFloat(e.target.value) || 0))}
                       className="w-full bg-slate-50 border border-slate-150 hover:bg-slate-100 rounded-xl px-3 py-2.5 text-xs font-semibold text-slate-800"
                     />
                   </div>
@@ -908,8 +908,8 @@ export default function ProfileSettings({ onProfileUpdated, onAppNameChanged, cu
                     <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">Age (yrs)</label>
                     <input
                       type="number"
-                      value={calcAge}
-                      onChange={(e) => setCalcAge(parseInt(e.target.value) || 28)}
+                      value={calcAge || ""}
+                      onChange={(e) => setCalcAge(e.target.value === "" ? 0 : (parseInt(e.target.value) || 0))}
                       className="w-full bg-slate-50 border border-slate-150 hover:bg-slate-100 rounded-xl px-3 py-2.5 text-xs font-semibold text-slate-800"
                     />
                   </div>
@@ -935,8 +935,8 @@ export default function ProfileSettings({ onProfileUpdated, onAppNameChanged, cu
                     <label className="block text-[10px] font-bold text-slate-500 mb-0.5">Calorie Intake Target (kcal)</label>
                     <input
                       type="number"
-                      value={goals.dailyCalorieBudget}
-                      onChange={(e) => setGoals({ ...goals, dailyCalorieBudget: parseInt(e.target.value) || 2000 })}
+                      value={goals.dailyCalorieBudget || ""}
+                      onChange={(e) => setGoals({ ...goals, dailyCalorieBudget: e.target.value === "" ? 0 : (parseInt(e.target.value) || 0) })}
                       className="w-full bg-slate-50 border border-slate-150 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                     />
                   </div>
@@ -946,8 +946,8 @@ export default function ProfileSettings({ onProfileUpdated, onAppNameChanged, cu
                       <label className="block text-[9px] font-bold text-emerald-700 mb-0.5">Protein (g)</label>
                       <input
                         type="number"
-                        value={goals.targetProteinG}
-                        onChange={(e) => setGoals({ ...goals, targetProteinG: parseInt(e.target.value) || 120 })}
+                        value={goals.targetProteinG || ""}
+                        onChange={(e) => setGoals({ ...goals, targetProteinG: e.target.value === "" ? 0 : (parseInt(e.target.value) || 0) })}
                         className="w-full bg-emerald-50 border border-emerald-150 rounded-xl px-2.5 py-1.5 text-xs font-bold text-emerald-900"
                       />
                     </div>
@@ -955,8 +955,8 @@ export default function ProfileSettings({ onProfileUpdated, onAppNameChanged, cu
                       <label className="block text-[9px] font-bold text-amber-700 mb-0.5">Carbs (g)</label>
                       <input
                         type="number"
-                        value={goals.targetCarbsG}
-                        onChange={(e) => setGoals({ ...goals, targetCarbsG: parseInt(e.target.value) || 180 })}
+                        value={goals.targetCarbsG || ""}
+                        onChange={(e) => setGoals({ ...goals, targetCarbsG: e.target.value === "" ? 0 : (parseInt(e.target.value) || 0) })}
                         className="w-full bg-amber-50 border border-amber-150 rounded-xl px-2.5 py-1.5 text-xs font-bold text-amber-900"
                       />
                     </div>
@@ -964,8 +964,8 @@ export default function ProfileSettings({ onProfileUpdated, onAppNameChanged, cu
                       <label className="block text-[9px] font-bold text-rose-700 mb-0.5">Fat (g)</label>
                       <input
                         type="number"
-                        value={goals.targetFatG}
-                        onChange={(e) => setGoals({ ...goals, targetFatG: parseInt(e.target.value) || 60 })}
+                        value={goals.targetFatG || ""}
+                        onChange={(e) => setGoals({ ...goals, targetFatG: e.target.value === "" ? 0 : (parseInt(e.target.value) || 0) })}
                         className="w-full bg-rose-50 border border-rose-150 rounded-xl px-2.5 py-1.5 text-xs font-bold text-rose-900"
                       />
                     </div>
