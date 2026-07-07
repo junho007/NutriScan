@@ -112,28 +112,9 @@ export default function AuthPage({ onAuthSuccess }: AuthPageProps) {
       }, 1200);
     } catch (err: any) {
       console.error(err);
-      setError("Google authentication was aborted or failed. Attempting offline mode.");
+      setError(err.message || "Google authentication was aborted or failed.");
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  // Skip Login for developers or fast testing
-  const handleSandboxLogin = async () => {
-    setIsLoading(true);
-    try {
-      // Just log in as standard demo account
-      await authService.login("demo@nutriscan.com", "password123");
-    } catch (e) {
-      // If demo account doesn't exist locally, register it
-      try {
-        await authService.register("demo@nutriscan.com", "password123", "Guest User", "+1", "555-0199");
-      } catch (err) {
-        // Fallback directly
-      }
-    } finally {
-      setIsLoading(false);
-      onAuthSuccess();
     }
   };
 
@@ -351,15 +332,6 @@ export default function AuthPage({ onAuthSuccess }: AuthPageProps) {
             <path fill="#34A853" d="M12 23c3.24 0 5.97-1.07 7.96-2.91l-3.66-2.84c-1.01.68-2.31 1.09-4.3 1.09-3.1 0-5.78-2.11-6.72-5.4l-3.8 2.94C3.4 20.34 7.37 23 12 23z" />
           </svg>
           <span>Auth with Google Account</span>
-        </button>
-
-        {/* Sandbox fast access button for user convenience */}
-        <button
-          onClick={handleSandboxLogin}
-          className="w-full mt-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-extrabold text-xs py-2.5 rounded-2xl flex items-center justify-center gap-1.5 transition-all cursor-pointer"
-        >
-          <ShieldCheck className="w-4 h-4" />
-          <span>Instant Developer / Sandbox Access</span>
         </button>
 
       </div>

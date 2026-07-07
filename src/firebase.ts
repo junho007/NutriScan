@@ -737,7 +737,7 @@ export const authService = {
   },
 
   // Google Single Sign-On Auth
-  async loginWithGoogle(): Promise<SimulatedUser | FirebaseUser> {
+  async loginWithGoogle(): Promise<FirebaseUser> {
     if (useFirebase && auth) {
       try {
         const provider = new GoogleAuthProvider();
@@ -747,11 +747,21 @@ export const authService = {
         triggerAuthChange(credentials.user);
         return credentials.user;
       } catch (fbError: any) {
-        console.warn("Firebase Google popup error, falling back to simulated Google sign-on:", fbError);
-        return this.simulatedGoogleLogin();
+        console.error("Firebase Google Auth failed:", fbError);
+        let msg = fbError.message || String(fbError);
+        if (fbError.code === "auth/operation-not-allowed") {
+          msg = "Google Sign-In is disabled in your Firebase project. Please enable Google Auth in your Firebase Console (Authentication > Sign-in method).";
+        } else if (fbError.code === "auth/unauthorized-domain") {
+          msg = `This domain is not authorized in your Firebase project. Please add '${window.location.hostname}' to the Authorized Domains list in your Firebase Console (Authentication > Settings > Authorized domains).`;
+        } else if (fbError.code === "auth/popup-blocked") {
+          msg = "The Google Sign-In popup was blocked by your browser. Please allow popups for this site and try again.";
+        } else {
+          msg = `Google Sign-In failed: ${fbError.message || fbError.code || fbError}. Make sure Google Auth is enabled in the Firebase Console and your domain (${window.location.hostname}) is listed in Authorized Domains.`;
+        }
+        throw new Error(msg);
       }
     } else {
-      return this.simulatedGoogleLogin();
+      throw new Error("Firebase Authentication is not initialized. Please verify your Firebase project settings and config.");
     }
   },
 
