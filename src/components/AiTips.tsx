@@ -9,7 +9,22 @@ import {
 
 // Helper for dynamic API routing in production/mobile builds
 const getApiUrl = (endpoint: string): string => {
-  const baseUrl = (import.meta as any).env.VITE_API_BASE_URL || "";
+  let baseUrl = (import.meta as any).env.VITE_API_BASE_URL || "";
+  
+  if (typeof window !== "undefined") {
+    const hostname = window.location.hostname;
+    const port = window.location.port;
+    
+    // Check if we are running in the development preview inside AI Studio
+    const isAiStudioDev = hostname.includes("run.app") || hostname.includes("aistudio") || (hostname === "localhost" && (port === "3000" || port === "5173"));
+    
+    if (!isAiStudioDev) {
+      // In production (Android APK/Webview, or deployed to Render/external domain), 
+      // default directly to the user's Render API production backend!
+      baseUrl = "https://nutriscan-ek70.onrender.com";
+    }
+  }
+
   if (baseUrl) {
     const cleanBase = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
     const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
